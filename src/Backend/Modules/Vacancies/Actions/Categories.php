@@ -10,7 +10,6 @@ use Backend\Core\Engine\Model;
 use Backend\Modules\Vacancies\Engine\Model as BackendVacanciesModel;
 use Backend\Modules\Vacancies\Engine\Category as BackendVacanciesCategoryModel;
 
-
 /**
  * This is the index-action (default), it will display the overview of Vacancies posts
  *
@@ -50,7 +49,7 @@ class Categories extends ActionIndex
             'name', array('class' => 'title')
         );
 
-        if($this->get('fork.settings')->get($this->getModule(), 'allow_subcategories', false) == true) {
+        if ($this->get('fork.settings')->get($this->getModule(), 'allow_subcategories', false) == true) {
             $this->dataGrid->addColumn(
                   'children', null, Language::lbl('ShowSubcategories'),
                   Model::createURLForAction('Categories') . '&amp;parent_id=[id]',

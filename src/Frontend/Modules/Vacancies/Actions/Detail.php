@@ -13,6 +13,7 @@ use Frontend\Modules\Vacancies\Engine\Entries as FrontendVacanciesEntriesModel;
 use Frontend\Modules\SiteHelpers\Engine\Email as FrontendnSiteHelpersEmail;
 use Frontend\Modules\SiteHelpers\Engine\Template as FrontendnSiteHelpersTemplate;
 use Common\Uri as CommonUri;
+
 /**
  * This is the index-action (default), it will display the overview of Vacancies posts
  *
@@ -43,11 +44,8 @@ class Detail extends Block
 
     private function loadForm()
     {
-
-
-
         $this->frm = new FrontendForm('details');
-        $this->frm->setAction($this->frm->getAction().'#details');
+        $this->frm->setAction($this->frm->getAction() . '#details');
 
         // create elements
         $this->frm->addText('first_name')->setAttributes(array('required' => null));
@@ -76,8 +74,7 @@ class Detail extends Block
             }
             $this->frm->getField('description')->isFilled(Language::err('FieldIsRequired'));
 
-            if($this->frm->getField('file')->isFilled(Language::err('FieldIsRequired')))
-            {
+            if ($this->frm->getField('file')->isFilled(Language::err('FieldIsRequired'))) {
                 //$this->frm->getField('file')->isAllowedMimeType(array(), Language::err('PdfAndDocOnly'));
             }
 
@@ -105,9 +102,8 @@ class Detail extends Block
 
                 FrontendVacanciesEntriesModel::insert($insert);
 
-                if($this->record['form_entries_email']){
-
-                    $backendUrl = SITE_URL . Navigation::getBackendURLForBlock('edit','vacancies', FRONTEND_LANGUAGE, array('id' => $this->record['id']));
+                if ($this->record['form_entries_email']) {
+                    $backendUrl = SITE_URL . Navigation::getBackendURLForBlock('edit', 'vacancies', FRONTEND_LANGUAGE, array('id' => $this->record['id']));
 
                     $emailMessage = FrontendnSiteHelpersTemplate::render(
                         FRONTEND_MODULES_PATH . '/Vacancies/Layout/Templates/Mails/NewEntry.html.twig',
@@ -127,8 +123,7 @@ class Detail extends Block
                 }
 
                 // redirect
-                $this->redirect( $this->record['full_url'] . '/' . Language::getAction('Success'));
-
+                $this->redirect($this->record['full_url'] . '/' . Language::getAction('Success'));
             }
         }
     }
@@ -174,8 +169,9 @@ class Detail extends Block
      */
     protected function parse()
     {
-        if($this->get('fork.settings')->get('Vacancies', 'use_image_as_og_image') && $this->record['image'])
+        if ($this->get('fork.settings')->get('Vacancies', 'use_image_as_og_image') && $this->record['image']) {
             $this->header->addOpenGraphImage(FRONTEND_FILES_URL . '/Vacancies/image/1200x630/' . $this->record['image']);
+        }
 
         // build Facebook  OpenGraph data
         $this->header->addOpenGraphData('title', $this->record['name'], true);
@@ -226,5 +222,4 @@ class Detail extends Block
         $numberOfParameters = count($this->URL->getParameters());
         return $this->URL->getParameter($numberOfParameters - 1);
     }
-
 }

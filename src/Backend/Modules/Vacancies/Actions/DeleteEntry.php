@@ -8,7 +8,6 @@ use Backend\Modules\Vacancies\Engine\Entries as BackendVacanciesEntriesModel;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
-
 /**
  * This is the delete-action, it deletes an item
  *
@@ -41,7 +40,8 @@ class DeleteEntry extends ActionDelete
             $this->redirect(
                 Model::createURLForAction('Edit') . '&report=deleted&id=' . $this->record['vacancy_id']
             );
+        } else {
+            $this->redirect(Model::createURLForAction('Index') . '&error=non-existing');
         }
-        else $this->redirect(Model::createURLForAction('Index') . '&error=non-existing');
     }
 }

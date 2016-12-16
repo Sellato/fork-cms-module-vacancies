@@ -14,7 +14,6 @@ use Frontend\Modules\Vacancies\Engine\Images as FrontendVacanciesImagesModel;
  */
 class Entries
 {
-
     public static function insert($item)
     {
         // get db
@@ -25,6 +24,4 @@ class Entries
         // insert
         return FrontendModel::get('database')->insert('vacancies_entries', $item);
     }
-
-
 }

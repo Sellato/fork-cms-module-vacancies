@@ -2,7 +2,6 @@
 
 namespace Frontend\Modules\Vacancies\Widgets;
 
-
 use Frontend\Core\Engine\Base\Widget as FrontendBaseWidget;
 use Frontend\Modules\Vacancies\Engine\Model as FrontendVacanciesModel;
 use Frontend\Modules\Vacancies\Engine\Categories as FrontendVacanciesCategoriesModel;

@@ -47,11 +47,11 @@ class Entries
        BackendModel::get('database')->delete('vacancies_entries', 'id = ?', (int) $id);
    }
 
-   public static function get($id)
-   {
-       $db = BackendModel::get('database');
+    public static function get($id)
+    {
+        $db = BackendModel::get('database');
 
-       $return =  (array) $db->getRecord(
+        $return =  (array) $db->getRecord(
            'SELECT i.*
             FROM vacancies_entries AS i
             WHERE i.id = ?',
@@ -59,30 +59,28 @@ class Entries
        );
 
 
-       return  $return;
+        return  $return;
+    }
 
-   }
+    public static function getAllForVacancy($id)
+    {
+        $db = BackendModel::get('database');
 
-     public static function getAllForVacancy($id)
-     {
-         $db = BackendModel::get('database');
+        $fileUrl = SITE_URL . FRONTEND_FILES_URL . '/Vacancies/file/';
 
-         $fileUrl = SITE_URL . FRONTEND_FILES_URL . '/Vacancies/file/';
-
-         $return =  (array) $db->getRecords(
+        $return =  (array) $db->getRecords(
              'SELECT i.id,i.first_name,  i.last_name, i.email, i.file
               FROM vacancies_entries AS i
               WHERE i.vacancy_id = ?',
              array((int) $id)
          );
 
-         foreach($return as &$record){
-             if(!empty($record['file'])){
-                 $record['file_url'] = $fileUrl . $record['file'];
-             }
-         }
+        foreach ($return as &$record) {
+            if (!empty($record['file'])) {
+                $record['file_url'] = $fileUrl . $record['file'];
+            }
+        }
 
-         return  $return;
-
-     }
+        return  $return;
+    }
 }

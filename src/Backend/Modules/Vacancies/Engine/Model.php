@@ -78,7 +78,7 @@ class Model
              ) {
                  $URL = BackendModel::addNumber($URL);
 
-                 return self::getURL($URL,$language, $id);
+                 return self::getURL($URL, $language, $id);
              }
          }
 
@@ -94,10 +94,9 @@ class Model
     {
         $entries = BackendVacanciesEntriesModel::getAllForVacancy($id);
         $fs = new Filesystem();
-        foreach($entries as $entry){
-          BackendVacanciesEntriesModel::delete($entry['id']);
-          $fs->remove(FRONTEND_FILES_PATH . '/Vacancies/file/' . $entry['file']);
-
+        foreach ($entries as $entry) {
+            BackendVacanciesEntriesModel::delete($entry['id']);
+            $fs->remove(FRONTEND_FILES_PATH . '/Vacancies/file/' . $entry['file']);
         }
 
         BackendModel::get('database')->delete('vacancies', 'id = ?', (int) $id);
@@ -105,8 +104,8 @@ class Model
         BackendModel::get('database')->delete('vacancies_linked_catgories', 'vacancy_id = ?', (int) $id);
 
         $images = (array) BackendVacanciesImagesModel::getAll((int) $id);
-        foreach($images as $image){
-            BackendModel::deleteThumbnails(FRONTEND_FILES_PATH . '/' . BackendModel::get('url')->getModule() . '/uploaded_images',  $image['filename']);
+        foreach ($images as $image) {
+            BackendModel::deleteThumbnails(FRONTEND_FILES_PATH . '/' . BackendModel::get('url')->getModule() . '/uploaded_images', $image['filename']);
         }
 
         BackendModel::get('database')->execute('DELETE c FROM vacancy_images_content c INNER JOIN vacancy_images i ON c.image_id = i.id WHERE i.vacancy_id = ?', array((int) $id));
@@ -154,7 +153,6 @@ class Model
             array((int) $id), 'language');
 
         return  $return;
-
     }
 
 
@@ -177,10 +175,8 @@ class Model
 
     public static function insertContent(array $content)
     {
-        foreach($content as &$item){
-
-            if( BackendModel::get('fork.settings')->get('Vacancies', 'make_widget_per_vacancy') == true)
-            {
+        foreach ($content as &$item) {
+            if (BackendModel::get('fork.settings')->get('Vacancies', 'make_widget_per_vacancy') == true) {
                 $data = [
                     'id' => $item['vacancy_id'],
                     'language' => $item['language'],
@@ -217,10 +213,8 @@ class Model
     public static function updateContent(array $content, $id)
     {
         $db = BackendModel::get('database');
-        foreach($content as $language => $row)
-        {
-            if( BackendModel::get('fork.settings')->get('Vacancies', 'make_widget_per_vacancy') == true && $row['extra_id'])
-            {
+        foreach ($content as $language => $row) {
+            if (BackendModel::get('fork.settings')->get('Vacancies', 'make_widget_per_vacancy') == true && $row['extra_id']) {
                 $data = [
                     'id' => $row['vacancy_id'],
                     'language' => $row['language'],
