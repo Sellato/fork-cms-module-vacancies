@@ -1,0 +1,12 @@
+{% if widgetVacanciesCategoriesNavigation %}
+	<ul>
+		<li>
+			<a href="{$var|geturlforblock:'Vacancies'}">Work</a>
+		</li>
+		{% for item in widgetVacanciesCategoriesNavigation %}
+			<li>
+				<a href="{{ item.full_url }}" title="{{ item.name }}">{{ item.name }}</a>
+			</li>
+		{% endfor %}
+	</ul>
+{% endif %}
