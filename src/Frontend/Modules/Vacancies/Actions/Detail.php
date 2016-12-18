@@ -45,7 +45,7 @@ class Detail extends Block
     private function loadForm()
     {
         $this->frm = new FrontendForm('details');
-        $this->frm->setAction($this->frm->getAction() . '#details');
+        $this->frm->setAction($this->frm->getAction().'#details');
 
         // create elements
         $this->frm->addText('first_name')->setAttributes(array('required' => null));
@@ -75,7 +75,12 @@ class Detail extends Block
             $this->frm->getField('description')->isFilled(Language::err('FieldIsRequired'));
 
             if ($this->frm->getField('file')->isFilled(Language::err('FieldIsRequired'))) {
-                //$this->frm->getField('file')->isAllowedMimeType(array(), Language::err('PdfAndDocOnly'));
+                //$this->frm->getField('file')->isAllowedMimeType(array(), Language::err('PdfAndDocFilesOnly'));
+                $tmpFileName = $this->frm->getField('file')->getTempFileName();
+                $mime = @mime_content_type($tmpFileName);
+                if($mime === false) $this->frm->getField('file')->setError(Language::err('PdfAndDocFilesOnly'));
+                $isMime = in_array($mime, array('application/pdf','application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document'));
+                if(!$isMime) $this->frm->getField('file')->setError(Language::err('PdfAndDocFilesOnly'));
             }
 
             // no errors?

@@ -72,11 +72,11 @@ class EditCategory extends ActionEdit
         $this->frm->addDropdown('parent_id', $categories, $this->record['parent_id'])->setDefaultElement('', 0);
 
         foreach ($this->languages as &$language) {
-            $field = $this->frm->addText('name_' . $language['abbreviation'], isset($this->record['content'][$language['abbreviation']]['name']) ? $this->record['content'][$language['abbreviation']]['name'] : '', null, 'form-control title', 'form-control danger title');
+            $field = $this->frm->addText('name_'. $language['abbreviation'], isset($this->record['content'][$language['abbreviation']]['name']) ? $this->record['content'][$language['abbreviation']]['name'] : '', null, 'form-control title', 'form-control danger title');
             $language['name_field'] = $field->parse();
             $language['name_errors'] = $field->getErrors();
 
-            $field = $this->frm->addEditor('description_' . $language['abbreviation'], isset($this->record['content'][$language['abbreviation']]['description']) ? $this->record['content'][$language['abbreviation']]['description'] : '');
+            $field = $this->frm->addEditor('description_'. $language['abbreviation'], isset($this->record['content'][$language['abbreviation']]['description']) ? $this->record['content'][$language['abbreviation']]['description'] : '');
             $language['description_field'] = $field->parse();
             $language['description_errors'] = $field->getErrors();
         }
@@ -106,8 +106,8 @@ class EditCategory extends ActionEdit
             $fields = $this->frm->getFields();
 
             foreach ($this->languages as $key => $language) {
-                $field = $this->frm->getField('name_' . $this->languages[$key]['abbreviation'])->isFilled(Language::getError('FieldIsRequired'));
-                $this->languages [$key]['name_errors'] = $this->frm->getField('name_' . $this->languages[$key]['abbreviation'])->getErrors();
+                $field = $this->frm->getField('name_'. $this->languages[$key]['abbreviation'])->isFilled(Language::getError('FieldIsRequired'));
+                $this->languages [$key]['name_errors'] = $this->frm->getField('name_'. $this->languages[$key]['abbreviation'])->getErrors();
             }
 
 
@@ -130,9 +130,9 @@ class EditCategory extends ActionEdit
                     $specific['extra_id'] = $this->record['content'][$language['abbreviation']]['extra_id'];
                     $specific['category_id'] = $item['id'];
                     $specific['language'] = $language['abbreviation'];
-                    $specific['name'] = $this->frm->getField('name_' . $language['abbreviation'])->getValue();
+                    $specific['name'] = $this->frm->getField('name_'. $language['abbreviation'])->getValue();
                     $specific['url'] =  BackendVacanciesCategoryModel::getURL(CommonUri::getUrl($specific['name']), $language['abbreviation'], $item['id']);
-                    $specific['description'] = ($this->frm->getField('description_' . $language['abbreviation'])->isFilled()) ? $this->frm->getField('description_' . $language['abbreviation'])->getValue() : null;
+                    $specific['description'] = ($this->frm->getField('description_'. $language['abbreviation'])->isFilled()) ? $this->frm->getField('description_'. $language['abbreviation'])->getValue() : null;
                     $content[$language['abbreviation']] = $specific;
 
                     BackendSearchModel::saveIndex(

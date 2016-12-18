@@ -92,7 +92,7 @@ class Categories
             JOIN vacancies as p on p.id = pc.vacancy_id
             WHERE i.path != ? AND i.path LIKE ? AND c.language = ? AND i.hidden = ? AND p.hidden = ? AND p.publish_on <= ?',
            array(
-               $path ,
+               $path,
                $path . '%',
                FRONTEND_LANGUAGE,
                'N',
@@ -129,7 +129,7 @@ class Categories
             WHERE  i.parent_id != ? AND pc.vacancy_id = ? AND c.language = ? AND i.hidden = ? AND p.hidden = ? AND p.publish_on <= ? GROUP BY i.id',
            array(
               0,
-               $vacancy_id ,
+               $vacancy_id,
                FRONTEND_LANGUAGE,
                'N',
                'N',
@@ -182,7 +182,7 @@ class Categories
              INNER JOIN vacancies_linked_catgories AS c on i.id = c.category_id
              INNER JOIN vacancies AS p on c.vacancy_id = p.id
              WHERE i.parent_id = ? AND co.language = ?
-             GROUP BY i.id ORDER BY i.sequence', array( (int) $parent_id , FRONTEND_LANGUAGE));
+             GROUP BY i.id ORDER BY i.sequence', array( (int) $parent_id, FRONTEND_LANGUAGE));
     }
 
      /**

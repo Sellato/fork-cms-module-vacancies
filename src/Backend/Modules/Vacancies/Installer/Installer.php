@@ -57,7 +57,7 @@ class Installer extends ModuleInstaller
 
         $navigationModulesId = $this->setNavigation(null, 'Modules');
         //$navigationModulesId = $this->setNavigation($navigationModulesId, 'Vacancies');
-        $this->setNavigation($navigationModulesId, 'Vacancies', 'vacancies/index', array('vacancies/add','vacancies/edit', 'vacancies/index', 'vacancies/add_images', 'vacancies/edit_image'), 1);
+        $this->setNavigation($navigationModulesId, 'Vacancies', 'vacancies/index', array('vacancies/add', 'vacancies/edit', 'vacancies/index', 'vacancies/add_images', 'vacancies/edit_image'), 1);
         //$this->setNavigation($navigationModulesId, 'Categories', 'vacancies/categories', array('vacancies/add_category','vacancies/edit_category', 'vacancies/categories'), 2);
 
          // settings navigation

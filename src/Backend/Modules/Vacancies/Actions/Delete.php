@@ -24,7 +24,7 @@ class Delete extends ActionDelete
         if ($this->id !== null && BackendVacanciesModel::exists($this->id)) {
             parent::execute();
             $this->record = (array) BackendVacanciesModel::get($this->id);
-            Model::deleteThumbnails(FRONTEND_FILES_PATH . '/' . $this->getModule() . '/image', $this->record['image']);
+            Model::deleteThumbnails(FRONTEND_FILES_PATH . '/' . $this->getModule() . '/image',  $this->record['image']);
 
             // delete extra_ids
             foreach ($this->record['content'] as $row) {

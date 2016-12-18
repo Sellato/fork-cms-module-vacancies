@@ -147,6 +147,10 @@
           <translation language="nl"><![CDATA[Alleen .pdf en .doc(x) bestanden.]]></translation>
           <translation language="en"><![CDATA[Only .pdf and .doc(x) files.]]></translation>
         </item>
+        <item type="error" name="PdfAndDocFilesOnly">
+          <translation language="nl"><![CDATA[Alleen .pdf en .doc(x) bestanden.]]></translation>
+          <translation language="en"><![CDATA[Only .pdf and .doc(x) files.]]></translation>
+        </item>
 
       </Core>
   </Frontend>

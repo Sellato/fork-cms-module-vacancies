@@ -78,16 +78,16 @@ class EditImage extends ActionEdit
 
 
         foreach ($this->languages as &$language) {
-            $field = $this->frm->addText('name_' . $language['abbreviation'], isset($this->record['content'][$language['abbreviation']]['name']) ? $this->record['content'][$language['abbreviation']]['name'] : '', null, 'form-control title', 'form-control danger title');
+            $field = $this->frm->addText('name_'. $language['abbreviation'], isset($this->record['content'][$language['abbreviation']]['name']) ? $this->record['content'][$language['abbreviation']]['name'] : '', null, 'form-control title', 'form-control danger title');
             $language['name_field'] = $field->parse();
             $language['name_errors'] = $field->getErrors();
 
-            $field = $this->frm->addEditor('description_' . $language['abbreviation'], isset($this->record['content'][$language['abbreviation']]['description']) ? $this->record['content'][$language['abbreviation']]['description'] : '');
+            $field = $this->frm->addEditor('description_'. $language['abbreviation'], isset($this->record['content'][$language['abbreviation']]['description']) ? $this->record['content'][$language['abbreviation']]['description'] : '');
             $language['description_field'] = $field->parse();
             $language['description_errors'] = $field->getErrors();
 
-            $url = Model::getURLForBlock($this->URL->getModule(), 'Detail', $language['abbreviation']);
-            $url404 = Model::getURL(404, $language['abbreviation']);
+            $url = Model::getURLForBlock($this->URL->getModule(), 'Detail',  $language['abbreviation']);
+            $url404 = Model::getURL(404,  $language['abbreviation']);
             $language['slug'] = isset($this->record['content'][$language['abbreviation']]['url']) ? $this->record['content'][$language['abbreviation']]['url'] : '';
             if ($url404 != $url) {
                 $language['url'] = SITE_URL . $url;
@@ -130,7 +130,7 @@ class EditImage extends ActionEdit
                     // replace old image
                     if ($this->record['filename']) {
                         $item['filename'] = null;
-                        Model::deleteThumbnails(FRONTEND_FILES_PATH . '/' . $this->getModule() . '/images', $this->record['filename']);
+                        Model::deleteThumbnails(FRONTEND_FILES_PATH . '/' . $this->getModule() . '/images',  $this->record['filename']);
                     }
 
                     // build the image name
@@ -145,9 +145,9 @@ class EditImage extends ActionEdit
                 foreach ($this->languages as $language) {
                     $specific['image_id'] = $item['id'];
                     $specific['language'] = $language['abbreviation'];
-                    $specific['name'] = $this->frm->getField('name_' . $language['abbreviation'])->getValue();
+                    $specific['name'] = $this->frm->getField('name_'. $language['abbreviation'])->getValue();
                     $specific['url'] =  BackendVacanciesImagesModel::getURL(CommonUri::getUrl($specific['name']), $language['abbreviation'], $item['id']);
-                    $specific['description'] = ($this->frm->getField('description_' . $language['abbreviation'])->isFilled()) ? $this->frm->getField('description_' . $language['abbreviation'])->getValue() : null;
+                    $specific['description'] = ($this->frm->getField('description_'. $language['abbreviation'])->isFilled()) ? $this->frm->getField('description_'. $language['abbreviation'])->getValue() : null;
                     $content[$language['abbreviation']] = $specific;
                 }
 

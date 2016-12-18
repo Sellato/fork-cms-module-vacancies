@@ -105,7 +105,7 @@ class Model
 
         $images = (array) BackendVacanciesImagesModel::getAll((int) $id);
         foreach ($images as $image) {
-            BackendModel::deleteThumbnails(FRONTEND_FILES_PATH . '/' . BackendModel::get('url')->getModule() . '/uploaded_images', $image['filename']);
+            BackendModel::deleteThumbnails(FRONTEND_FILES_PATH . '/' . BackendModel::get('url')->getModule() . '/uploaded_images',  $image['filename']);
         }
 
         BackendModel::get('database')->execute('DELETE c FROM vacancy_images_content c INNER JOIN vacancy_images i ON c.image_id = i.id WHERE i.vacancy_id = ?', array((int) $id));

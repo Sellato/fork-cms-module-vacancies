@@ -261,7 +261,7 @@ class Model
                 ((i.sequence = ? AND i.id > ?) OR i.sequence > ?)
              ORDER BY i.sequence ASC, i.id ASC
              LIMIT 1',
-            array($detailLink, $id,FrontendModel::getUTCDate('Y-m-d H:i') . ':00', 'active', 'N',  FRONTEND_LANGUAGE, $currentSequence, $id, $currentSequence)
+            array($detailLink, $id, FrontendModel::getUTCDate('Y-m-d H:i') . ':00', 'active', 'N',  FRONTEND_LANGUAGE, $currentSequence, $id, $currentSequence)
         );
 
         // if empty, unset it
